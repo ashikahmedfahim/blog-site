@@ -4,7 +4,7 @@ import Form from "../components/Form";
 
 const Home = () => {
   return (
-    <Container>
+    <Container maxWidth="xl">
       <h1>Home</h1>
       <Form />
     </Container> 

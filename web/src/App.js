@@ -1,17 +1,15 @@
 import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import ResponsiveAppBar from "./app/components/ResponsiveAppBar";
+import AppBar from "./app/components/AppBar";
 import styles from "./App.module.css";
-import SwipeableTemporaryDrawer from "./app/components/SwipeableTemporaryDrawer";
 
 const Home = lazy(() => import("./app/pages/Home"));
 const About = lazy(() => import("./app/pages/About"));
 
 const App = () => (
   <div className={styles.container}>
+    <AppBar />
     <Router>
-      <ResponsiveAppBar />
-      <SwipeableTemporaryDrawer />
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route exact path="/" element={<Home />} />

@@ -10,13 +10,17 @@ import ListItemIcon from "@material-ui/icons/List";
 import InboxIcon from "@material-ui/icons/MoveToInbox";
 import MailIcon from "@material-ui/icons/Mail";
 
-export default function SwipeableTemporaryDrawer() {
+export default function SwipeableTemporaryDrawer(props) {
+  const { open: isSidenavOpen } = props;
   const [state, setState] = React.useState({
-    top: false,
-    left: false,
-    bottom: false,
-    right: false,
+    left: props.open,
   });
+
+  React.useEffect(() => {
+    if (isSidenavOpen) {
+      setState({ left: true });
+    }
+  }, [isSidenavOpen]);
 
   const toggleDrawer = (anchor, open) => (event) => {
     if (
@@ -28,6 +32,7 @@ export default function SwipeableTemporaryDrawer() {
     }
 
     setState({ ...state, [anchor]: open });
+    props.onClose();
   };
 
   const list = (anchor) => (
@@ -63,9 +68,8 @@ export default function SwipeableTemporaryDrawer() {
 
   return (
     <div>
-      {["left", "right", "top", "bottom"].map((anchor) => (
+      {["left"].map((anchor) => (
         <React.Fragment key={anchor}>
-          <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
           <SwipeableDrawer
             anchor={anchor}
             open={state[anchor]}
