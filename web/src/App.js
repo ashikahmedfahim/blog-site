@@ -7,7 +7,7 @@ const Home = lazy(() => import("./app/pages/Home"));
 const About = lazy(() => import("./app/pages/About"));
 
 const App = () => (
-  <div className={styles.container}>
+  <>
     <AppBar />
     <Router>
       <Suspense fallback={<div>Loading...</div>}>
@@ -17,7 +17,7 @@ const App = () => (
         </Routes>
       </Suspense>
     </Router>
-  </div>
+  </>
 );
 
 export default App;
