@@ -1,14 +1,17 @@
 const { User } = require("../models/index");
-const { DataValidator, ExpressError } = require("../utilities");
+const { DataValidator, ExpressError, ModelService } = require("../utilities");
 
 module.exports.getAll = async (req, res) => {
-  const users = await User.findAll();
-  res.status(200).json(users);
+  let queryOptions = ModelService.queryOptions(req);
+  const users = await User.findAll(queryOptions);
+  if (!users.length) throw new ExpressError(404, "Users not found");
+  ModelService.successResponse(res, 200, users);
 };
 
 module.exports.getOne = async (req, res) => {
   const user = await User.findByPk(req.params.id);
-  res.status(200).json(user);
+  if (!user) throw new ExpressError(404, "User not found");
+  ModelService.successResponse(res, 200, user);
 };
 
 module.exports.createOne = async (req, res) => {
@@ -17,10 +20,11 @@ module.exports.createOne = async (req, res) => {
   const isUserExist = await User.findOne({
     where: { email: value.email },
   });
-  if (isUserExist) throw new ExpressError(400, "This email is already registered");
+  if (isUserExist)
+    throw new ExpressError(400, "This email is already registered");
   const user = await User.create(value);
   if (!user) throw new ExpressError(400, "User not created");
-  res.status(201).json(user);
+  ModelService.successResponse(res, 201, user, "User created successfully");
 };
 
 module.exports.updateOne = async (req, res) => {
@@ -29,12 +33,14 @@ module.exports.updateOne = async (req, res) => {
     returning: true,
     plain: true,
   });
-  res.status(200).json(user);
+  if (!user) throw new ExpressError(404, "User not found");
+  ModelService.successResponse(res, 200, user, "User updated successfully");
 };
 
 module.exports.deleteOne = async (req, res) => {
   const user = await User.destroy({
     where: { id: req.params.id },
   });
-  res.status(200).json(user);
+  if (!user) throw new ExpressError(404, "User not found");
+  ModelService.successResponse(res, 200, user, "User deleted successfully");
 };

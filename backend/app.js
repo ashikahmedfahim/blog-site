@@ -4,7 +4,7 @@ const cors = require("cors");
 require("dotenv").config();
 const config = require("./src/config/config");
 const { User } = require("./src/app/routes");
-const { ExpressError } = require("./src/app/utilities");
+const { ExpressError, ModelService } = require("./src/app/utilities");
 
 const port = process.env.PORT || 3000;
 
@@ -25,5 +25,5 @@ app.use("*", (req, res, next) => {
 
 app.use((err, req, res, next) => {
   const { statusCode = 500, message = "Internal Server Error" } = err;
-  res.status(statusCode).json(message);
+  ModelService.errorResponse(res, statusCode, message);
 });
