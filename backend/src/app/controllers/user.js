@@ -1,5 +1,7 @@
 const { User } = require("../models/index");
 const { DataValidator, ExpressError, ModelService } = require("../utilities");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 module.exports.getAll = async (req, res) => {
   let queryOptions = ModelService.queryOptions(req);
@@ -22,9 +24,28 @@ module.exports.createOne = async (req, res) => {
   });
   if (isUserExist)
     throw new ExpressError(400, "This email is already registered");
-  const user = await User.create(value);
+  const salt = await bcrypt.genSalt(12);
+  const hashedPassword = await bcrypt.hash(value.password, salt);
+  const user = await User.create({ ...value, password: hashedPassword });
   if (!user) throw new ExpressError(400, "User not created");
-  ModelService.successResponse(res, 201, user, "User created successfully");
+  let token = jwt.sign(
+    {
+      id: user.id,
+      email: user.email,
+      first_name: user.first_name,
+      last_name: user.last_name,
+    },
+    process.env.JWT_SECRET,
+    {
+      expiresIn: 3600,
+    }
+  );
+  ModelService.successResponse(
+    res,
+    201,
+    { token },
+    "User Signed Up successfully"
+  );
 };
 
 module.exports.updateOne = async (req, res) => {

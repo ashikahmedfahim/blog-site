@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 require("dotenv").config();
 const config = require("./src/config/config");
-const { User } = require("./src/app/routes");
+const { User, Auth } = require("./src/app/routes");
 const { ExpressError, ModelService } = require("./src/app/utilities");
 
 const port = process.env.PORT || 3000;
@@ -18,6 +18,7 @@ app.listen(port, () => {
 config.connectToDatabase();
 
 app.use("/users", User);
+app.use("/login", Auth);
 
 app.use("*", (req, res, next) => {
   next(new ExpressError(404, "Page not found"));
