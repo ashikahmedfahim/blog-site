@@ -3,3 +3,4 @@ PASSWORD = root
 USER = postgres
 DATABASE = ashikahmed_blog
 host = Ht_u}zWk4%~K
+JWT_SECRET = happyNewyear
