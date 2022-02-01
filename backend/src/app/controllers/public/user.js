@@ -1,5 +1,5 @@
-const { User } = require("../models/index");
-const { DataValidator, ExpressError, ModelService } = require("../utilities");
+const { User } = require("../../models/index");
+const { DataValidator, ExpressError, ModelService } = require("../../utilities");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 

@@ -1,7 +1,7 @@
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcrypt");
-const { User } = require("../models/index");
-const { DataValidator, ModelService, ExpressError } = require("../utilities");
+const { User } = require("../../models/index");
+const { DataValidator, ModelService, ExpressError } = require("../../utilities");
 
 module.exports.login = async (req, res, next) => {
   const { error, value } = DataValidator.isValidUserLoginObject(req.body);

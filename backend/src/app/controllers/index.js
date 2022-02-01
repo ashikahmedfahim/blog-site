@@ -1,4 +1,5 @@
-const User = require("./user");
-const Auth = require("./auth");
+const PublicController = require("./public");
 
-module.exports = { User, Auth };
+module.exports = {
+  PublicController,
+};
