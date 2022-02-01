@@ -20,3 +20,14 @@ module.exports.isValidUserLoginObject = (data) => {
   const { error, value } = schema.validate(data);
   return { error, value };
 };
+
+module.exports.isValidPostObject = (data) => {
+  const schema = Joi.object({
+    title: Joi.string().required(),
+    description: Joi.string().required(),
+    img_url: Joi.string(),
+    user_id: Joi.objectId().required(),
+  });
+  const { error, value } = schema.validate(data);
+  return { error, value };
+};
