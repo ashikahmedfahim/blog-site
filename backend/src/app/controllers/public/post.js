@@ -1,4 +1,4 @@
-const { Post } = require("../../models/index");
+const { Post, Tag } = require("../../models/index");
 const {
   DataValidator,
   ExpressError,
@@ -6,9 +6,11 @@ const {
 } = require("../../utilities");
 
 module.exports.getAll = async (req, res) => {
+  let include = [];
   let queryOptions = ModelService.queryOptions(req);
+  include = [Tag];
+  queryOptions.include = include;
   const posts = await Post.findAndCountAll(queryOptions);
-  if (!posts.length) throw new ExpressError(404, "Posts not found");
   ModelService.successResponse(res, 200, posts);
 };
 
