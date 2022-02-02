@@ -8,6 +8,7 @@ const {
 module.exports.getAll = async (req, res) => {
   let queryOptions = ModelService.queryOptions(req);
   const posts = await Post.findAndCountAll(queryOptions);
+  if (!posts.length) throw new ExpressError(404, "Posts not found");
   ModelService.successResponse(res, 200, posts);
 };
 

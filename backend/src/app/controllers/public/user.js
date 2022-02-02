@@ -1,5 +1,9 @@
 const { User } = require("../../models/index");
-const { DataValidator, ExpressError, ModelService } = require("../../utilities");
+const {
+  DataValidator,
+  ExpressError,
+  ModelService,
+} = require("../../utilities");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -11,7 +15,8 @@ module.exports.getAll = async (req, res) => {
 };
 
 module.exports.getOne = async (req, res) => {
-  const user = await User.findByPk(req.params.id);
+  const { id } = req.params;
+  const user = await User.findByPk(id);
   if (!user) throw new ExpressError(404, "User not found");
   ModelService.successResponse(res, 200, user);
 };
@@ -49,19 +54,31 @@ module.exports.createOne = async (req, res) => {
 };
 
 module.exports.updateOne = async (req, res) => {
-  const user = await User.update(req.body, {
-    where: { id: req.params.id },
-    returning: true,
-    plain: true,
-  });
+  const { id } = req.params;
+  const user = await User.findByPk(id);
   if (!user) throw new ExpressError(404, "User not found");
-  ModelService.successResponse(res, 200, user, "User updated successfully");
+  const { error, value } = DataValidator.isValidUserObject(req.body);
+  if (error) throw new ExpressError(400, error.details[0].message);
+  const updatedUser = await user.update(value);
+  if (!updatedUser) throw new ExpressError(400, "User not updated");
+  ModelService.successResponse(
+    res,
+    200,
+    updatedUser,
+    "User updated successfully"
+  );
 };
 
 module.exports.deleteOne = async (req, res) => {
-  const user = await User.destroy({
-    where: { id: req.params.id },
-  });
+  const { id } = req.params;
+  const user = await User.findByPk(id);
   if (!user) throw new ExpressError(404, "User not found");
-  ModelService.successResponse(res, 200, user, "User deleted successfully");
+  const deletedUser = await user.destroy();
+  if (!deletedUser) throw new ExpressError(400, "User not deleted");
+  ModelService.successResponse(
+    res,
+    200,
+    deletedUser,
+    "User deleted successfully"
+  );
 };
