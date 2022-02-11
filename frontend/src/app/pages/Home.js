@@ -1,25 +1,25 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { Container } from "@mui/material";
-import Form from "../components/Form";
 import { useSelector, useDispatch } from "react-redux";
 import { getAllPosts } from "../redux/actions/PostAction";
+import CircularIndeterminate from "../components/CircularIndeterminate";
 
 const Home = () => {
-  const [posts, setPosts] = useState();
-
+  let data = useSelector((state) => state.postStore);
+  console.log(data);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getAllPosts());
   }, [dispatch]);
 
-  let data = useSelector((state) => state);
-  console.log(data);
-
   return (
     <Container maxWidth="xl">
       <h1>Home</h1>
-      <Form />
+      {data.isLoading && <CircularIndeterminate />}
+      {data.hasError && data.message ? data.message : null}
+      {!data.hasError && data.message ? data.message : null}
+      {data.rows && data.rows.map((item) => <p key={item.id}>{item.title}</p>)}
     </Container>
   );
 };

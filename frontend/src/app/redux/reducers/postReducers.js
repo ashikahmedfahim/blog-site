@@ -5,27 +5,33 @@ export const postReducers = (state = {}, action) => {
     case PostConstants.GET_ALL_POSTS:
       return {
         ...state,
-        posts: action.payload,
+        rows: action.payload.rows,
+        total: action.payload.count,
+        message: action.payload.message,
       };
     case PostConstants.GET_ONE_POST:
       return {
         ...state,
-        post: action.payload,
+        row: action.payload,
+        message: action.payload.message,
       };
     case PostConstants.CREATE_ONE_POST:
       return {
         ...state,
-        post: action.payload,
+        row: action.payload,
+        message: action.payload.message,
       };
     case PostConstants.UPDATE_ONE_POST:
       return {
         ...state,
-        post: action.payload,
+        row: action.payload,
+        message: action.payload.message,
       };
     case PostConstants.DELETE_ONE_POST:
       return {
         ...state,
-        post: action.payload,
+        row: action.payload,
+        message: action.payload.message,
       };
     case PostConstants.IS_LOADING_POST:
       return {
@@ -41,13 +47,15 @@ export const postReducers = (state = {}, action) => {
       return {
         ...state,
         hasError: true,
-        errorMessage: action.payload,
+        message: action.payload.message,
       };
-    case PostConstants.HAS_MESSAGE_POST:
+    case PostConstants.REMOVE_ERROR_POST:
       return {
         ...state,
-        hasMessage: true,
-        message: action.payload,
+        hasError: false,
+        message: "",
       };
+    default:
+      return state;
   }
 };

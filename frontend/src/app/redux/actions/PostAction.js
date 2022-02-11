@@ -6,8 +6,8 @@ export const getAllPosts = () => {
   return async (dispatch) => {
     try {
       dispatch({ type: PostConstants.IS_LOADING_POST });
-      const res = await axios.get(`${apiUrl}/tags`);
-      dispatch({ type: PostConstants.GET_ALL_POSTS, payload: res.data });
+      const { data } = await axios.get(`${apiUrl}/posts`);
+      dispatch({ type: PostConstants.GET_ALL_POSTS, payload: data.data });
       dispatch({ type: PostConstants.LOADED_POST });
     } catch (err) {
       console.log(err);

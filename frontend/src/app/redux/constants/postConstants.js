@@ -6,7 +6,7 @@ const DELETE_ONE_POST = "DELETE_ONE_POST";
 const IS_LOADING_POST = "LOADING_POST";
 const LOADED_POST = "LOADED_POST";
 const HAS_ERROR_POST = "HAS_ERROR_POST";
-const HAS_MESSAGE_POST = "HAS_MESSAGE_POST";
+const REMOVE_ERROR_POST = "REMOVE_ERROR_POST";
 
 const postConstants = {
   GET_ALL_POSTS,
@@ -17,7 +17,7 @@ const postConstants = {
   IS_LOADING_POST,
   LOADED_POST,
   HAS_ERROR_POST,
-  HAS_MESSAGE_POST,
+  REMOVE_ERROR_POST,
 };
 
 export default postConstants;

@@ -11,13 +11,15 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
+import { useNavigate } from "react-router-dom";
 
-const pages = ["Products", "Pricing", "Blog"];
+const pages = ["posts", "Pricing", "Blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const ResponsiveAppBar = (props) => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const navigate = useNavigate();
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -43,6 +45,7 @@ const ResponsiveAppBar = (props) => {
             variant="h6"
             noWrap
             component="div"
+            onClick={() => navigate("/")}
             sx={{ mr: 2, display: { xs: "none", md: "flex" } }}
           >
             LOGO
@@ -64,6 +67,7 @@ const ResponsiveAppBar = (props) => {
             variant="h6"
             noWrap
             component="div"
+            onClick={() => navigate("/")}
             sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}
           >
             LOGO
@@ -72,14 +76,29 @@ const ResponsiveAppBar = (props) => {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={handleCloseNavMenu}
+                onClick={() => navigate(`/${page}`)}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
                 {page}
               </Button>
             ))}
           </Box>
-
+          <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
+            <Button
+              onClick={() => navigate(`/sign-up`)}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Sign up
+            </Button>
+          </Box>
+          <Box sx={{ flexGrow: 0, display: { xs: "none", md: "flex" } }}>
+            <Button
+              onClick={() => navigate(`/sign-in`)}
+              sx={{ my: 2, color: "white", display: "block" }}
+            >
+              Sign In
+            </Button>
+          </Box>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>

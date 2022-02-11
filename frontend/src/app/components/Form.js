@@ -19,28 +19,62 @@ const Form = () => {
   useEffect(() => {}, [open]);
 
   return (
-    <Box
-      component="form"
-      // sx={{
-      //   "& .MuiTextField-root": { m: 1, width: "50ch" },
-      // }}
-      noValidate
-      autoComplete="off"
-    >
-      <Paper elevation={3} sx={{ padding: "2rem 1rem" }}>
+    <Box component="form" noValidate autoComplete="off">
+      <Paper elevation={3} className="p-10 my-10">
         <TextField
           required
-          id="outlined-required"
-          label="Task Name"
+          fullWidth
+          id="firstName"
+          label="First Name"
           helperText="Incorrect entry."
           error
         />
-        <Button variant="contained" color="primary">
-          Save
-        </Button>
-        <Button variant="contained" color="error">
-          Cancel
-        </Button>
+        <TextField
+          required
+          fullWidth
+          id="lastName"
+          label="Last Name"
+          helperText="Incorrect entry."
+          error
+        />
+        <TextField
+          required
+          fullWidth
+          id="email"
+          label="Email"
+          helperText="Incorrect entry."
+          error
+        />
+        <TextField
+          required
+          fullWidth
+          id="password"
+          label="Password"
+          type="password"
+          helperText="Incorrect entry."
+          error
+        />
+        <TextField
+          required
+          fullWidth
+          id="confirmPassword"
+          label="Confirm Password"
+          type="password"
+          helperText="Incorrect entry."
+          error
+        />
+        <Box className="py-5 flex justify-end">
+          <Box className="mx-5">
+            <Button variant="contained" color="error">
+              Back
+            </Button>
+          </Box>
+          <Box>
+            <Button variant="contained" color="primary">
+              Sign up
+            </Button>
+          </Box>
+        </Box>
       </Paper>
       <AlertDialog />
     </Box>
