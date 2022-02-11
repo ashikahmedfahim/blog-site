@@ -1,4 +1,4 @@
-PORT     = 3000
+PORT     = 5000
 PASSWORD = root
 USER = postgres
 DATABASE = ashikahmed_blog

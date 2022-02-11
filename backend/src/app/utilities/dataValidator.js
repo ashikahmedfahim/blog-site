@@ -31,3 +31,11 @@ module.exports.isValidPostObject = (data) => {
   const { error, value } = schema.validate(data);
   return { error, value };
 };
+
+module.exports.isValidTagObject = (data) => {
+  const schema = Joi.object({
+    title: Joi.string().required(),
+  });
+  const { error, value } = schema.validate(data);
+  return { error, value };
+};

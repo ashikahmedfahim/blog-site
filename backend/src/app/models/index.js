@@ -8,6 +8,6 @@ Post.belongsTo(User, { foreignKey: "user_id" });
 Post.belongsToMany(Tag, { through: "post_tag", foreignKey: "post_id" });
 Tag.belongsToMany(Post, { through: "post_tag", foreignKey: "tag_id" });
 
-sequelize.sync();
+// sequelize.sync();
 
 module.exports = { User, Post, Tag };
