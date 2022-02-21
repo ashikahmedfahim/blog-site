@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-const SignInForm = () => {
+const SignInForm = (props) => {
   const SignUpschema = yup.object().shape({
     email: yup.string().email().required("Email is required"),
     password: yup.string().required("Password is required"),
@@ -23,7 +23,7 @@ const SignInForm = () => {
   });
 
   const handleFormSubmit = (formData) => {
-    console.log(formData);
+    props.handleSignIn(formData);
   };
 
   return (

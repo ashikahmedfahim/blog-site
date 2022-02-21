@@ -8,9 +8,11 @@ const {
 } = require("../../utilities");
 
 module.exports.login = async (req, res, next) => {
+  console.log(req.body);
   const { error, value } = DataValidator.isValidUserLoginObject(req.body);
   if (error) throw new ExpressError(400, error.details[0].message);
-  const user = await User.findOne({ email: value.email });
+  console.log(value);
+  const user = await User.findOne({ where: { email: value.email } });
   if (!user) throw new ExpressError(400, "User not found");
   const isValidUser = await bcrypt.compare(value.password, user.password);
   if (!isValidUser) throw new ExpressError(401, "Invalid credentials");

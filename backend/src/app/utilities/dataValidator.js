@@ -8,7 +8,12 @@ module.exports.isValidUserObject = (data) => {
     email: Joi.string().email().required(),
     password: Joi.string().min(8).required(),
   });
-  const { error, value } = schema.validate(data);
+  const { error, value } = schema.validate({
+    first_name: data.firstName,
+    last_name: data.lastName,
+    email: data.email,
+    password: data.password,
+  });
   return { error, value };
 };
 

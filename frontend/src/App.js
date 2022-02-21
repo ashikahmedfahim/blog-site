@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "./app/redux/store";
 import AppBar from "./app/components/AppBar";
 import CircularIndeterminate from "./app/components/CircularIndeterminate";
+import SnackBar from "./app/components/SnackBar";
 
 const Home = lazy(() => import("./app/pages/Home"));
 const About = lazy(() => import("./app/pages/About"));
@@ -25,6 +26,7 @@ const App = () => (
           <Route path="*" element={<div>Not found</div>} />
         </Routes>
       </Suspense>
+      <SnackBar />
     </Router>
   </Provider>
 );

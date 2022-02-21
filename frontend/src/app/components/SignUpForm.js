@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-const SignUpForm = () => {
+const SignUpForm = (props) => {
   const SignUpschema = yup.object().shape({
     firstName: yup.string().required("First name is required"),
     lastName: yup.string().required("Last name is required"),
@@ -30,7 +30,7 @@ const SignUpForm = () => {
   });
 
   const handleFormSubmit = (formData) => {
-    console.log(formData);
+    props.handleSignUp(formData);
   };
 
   return (

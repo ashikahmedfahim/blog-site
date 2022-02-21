@@ -22,6 +22,7 @@ module.exports.getOne = async (req, res) => {
 };
 
 module.exports.createOne = async (req, res) => {
+  console.log(req.body);
   const { error, value } = DataValidator.isValidUserObject(req.body);
   if (error) throw new ExpressError(400, error.details[0].message);
   const isUserExist = await User.findOne({
