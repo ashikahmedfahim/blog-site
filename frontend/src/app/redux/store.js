@@ -2,10 +2,12 @@ import { createStore, combineReducers, compose, applyMiddleware } from "redux";
 import thunk from "redux-thunk";
 import { postReducers } from "./reducers/postReducers";
 import { tagReducers } from "./reducers/tagReducers";
+import {authReducers} from "./reducers/authReducers";
 
 const reducers = combineReducers({
   postStore: postReducers,
-  tagSTore: tagReducers,
+  tagStore: tagReducers,
+  authStore: authReducers,
 });
 
 const initialState = {};
