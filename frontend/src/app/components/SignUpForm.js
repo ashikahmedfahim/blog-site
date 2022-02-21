@@ -4,11 +4,12 @@ import TextField from "@mui/material/TextField";
 import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import AlertDialog from "./AlertDialog";
+import Typography from "@mui/material/Typography";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-const Form = () => {
+const SignUpForm = () => {
   const SignUpschema = yup.object().shape({
     firstName: yup.string().required("First name is required"),
     lastName: yup.string().required("Last name is required"),
@@ -30,7 +31,7 @@ const Form = () => {
 
   const handleFormSubmit = (formData) => {
     console.log(formData);
-  }
+  };
 
   return (
     <Box
@@ -40,6 +41,14 @@ const Form = () => {
       onSubmit={handleSubmit(handleFormSubmit)}
     >
       <Paper elevation={3} className="p-10 my-10">
+        <Typography
+          variant="h1"
+          component="div"
+          gutterBottom
+          className="text-center"
+        >
+          Sign Up
+        </Typography>
         <TextField
           required
           fullWidth
@@ -48,7 +57,7 @@ const Form = () => {
           helperText={errors.firstName ? errors.firstName.message : ""}
           error={errors.firstName ? true : false}
           {...register("firstName")}
-          sx={{ marginBottom: "25px" }}
+          sx={{ marginBottom: errors.firstName ? "2px" : "25px" }}
         />
         <TextField
           required
@@ -58,7 +67,7 @@ const Form = () => {
           helperText={errors.lastName ? errors.lastName.message : ""}
           error={errors.lastName ? true : false}
           {...register("lastName")}
-          sx={{ marginBottom: "25px" }}
+          sx={{ marginBottom: errors.lastName ? "2px" : "25px" }}
         />
         <TextField
           required
@@ -68,7 +77,7 @@ const Form = () => {
           helperText={errors.email ? errors.email.message : ""}
           error={errors.email ? true : false}
           {...register("email")}
-          sx={{ marginBottom: "25px" }}
+          sx={{ marginBottom: errors.email ? "2px" : "25px" }}
         />
         <TextField
           required
@@ -79,7 +88,7 @@ const Form = () => {
           helperText={errors.password ? errors.password.message : ""}
           error={errors.password ? true : false}
           {...register("password")}
-          sx={{ marginBottom: "25px" }}
+          sx={{ marginBottom: errors.password ? "2px" : "25px" }}
         />
         <TextField
           required
@@ -92,7 +101,7 @@ const Form = () => {
           }
           error={errors.confirmPassword ? true : false}
           {...register("confirmPassword")}
-          sx={{ marginBottom: "25px" }}
+          sx={{ marginBottom: errors.confirmPassword ? "2px" : "25px" }}
         />
         <Box className="flex justify-end">
           <Box className="mx-5">
@@ -102,14 +111,14 @@ const Form = () => {
           </Box>
           <Box>
             <Button variant="contained" color="primary" type="submit">
-              Sign up
+              Sign Up
             </Button>
           </Box>
         </Box>
       </Paper>
-      <AlertDialog />
+      {/* <AlertDialog /> */}
     </Box>
   );
 };
 
-export default Form;
+export default SignUpForm;

@@ -1,5 +1,5 @@
 import React from "react";
-import Form from "../components/Form";
+import SignUpForm from "../components/SignUpForm";
 import { Container } from "@mui/material";
 
 const SignUp = () => {
@@ -7,7 +7,7 @@ const SignUp = () => {
     <Container maxWidth="xl">
       <div className="flex justify-center align-middle">
         <div className="lg:w-1/3 md:w-1/2">
-          <Form />
+          <SignUpForm />
         </div>
       </div>
     </Container>
