@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import SignInForm from "../components/SignInForm";
 import { Container } from "@mui/material";
 import { signIn } from "../redux/actions/AuthActions";
@@ -8,6 +9,15 @@ import SnackBar from "../components/SnackBar";
 
 const SignIn = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const authStore = useSelector((state) => state.authStore);
+
+  useEffect(() => {
+    if (authStore.isAuthenticated) {
+      navigate("/");
+    }
+  }, [authStore]);
 
   const { hasSuccess, hasError, message } = useSelector(
     (state) => state.helperStore
