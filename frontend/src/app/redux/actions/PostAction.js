@@ -8,10 +8,10 @@ export const getAllPosts = () => {
       dispatch({ type: PostConstants.IS_LOADING_POST });
       const { data } = await axios.get(`${apiUrl}/posts`);
       dispatch({ type: PostConstants.GET_ALL_POSTS, payload: data.data });
-      dispatch({ type: PostConstants.LOADED_POST });
     } catch (err) {
-      console.log(err);
-      dispatch({ type: PostConstants.HAS_ERROR_POST, payload: err.message });
+      dispatch({ type: PostConstants.HAS_ERROR_POST, payload: err });
+    } finally {
+      dispatch({ type: PostConstants.LOADED_POST });
     }
   };
 };
