@@ -1,9 +1,18 @@
-import React from 'react'
+import React from "react";
+import { Container } from "@mui/material";
+import RichTextEditor from "../components/RichTextEditor";
 
 const CreatePost = () => {
+  const [editorValue, setEditorValue] = React.useState("");
+  const handleChange = (value) => {
+    setEditorValue(value);
+  };
   return (
-    <div>CreatePost</div>
-  )
-}
+    <Container maxWidth="xl">
+      <RichTextEditor onChange={handleChange} />
+      <section>{editorValue}</section>
+    </Container>
+  );
+};
 
-export default CreatePost
+export default CreatePost;
