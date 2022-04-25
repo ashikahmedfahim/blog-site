@@ -14,7 +14,7 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import { useNavigate } from "react-router-dom";
 
-const pages = ["posts", "Pricing", "Blog"];
+const pages = ["posts", "create post", "blog"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const ResponsiveAppBar = (props) => {
@@ -86,10 +86,10 @@ const ResponsiveAppBar = (props) => {
             {pages.map((page) => (
               <Button
                 key={page}
-                onClick={() => navigate(`/${page}`)}
+                onClick={() => navigate(`/${page.replace(/ /g, "-")}`)}
                 sx={{ my: 2, color: "white", display: "block" }}
               >
-                {page}
+                {page.toUpperCase()}
               </Button>
             ))}
           </Box>
