@@ -6,3 +6,6 @@
   margin: 0px;
   padding: 0px;
 }
+.ql-editor {
+  min-height: 500px;
+}
