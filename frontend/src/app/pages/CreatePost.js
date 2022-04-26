@@ -1,23 +1,16 @@
 import React from "react";
 import { Container } from "@mui/material";
-import RichTextEditor from "../components/RichTextEditor";
-import ReactQuill from "react-quill";
+import PostForm from "../components/PostForm";
 
 const CreatePost = () => {
-  const [editorValue, setEditorValue] = React.useState("");
-  const handleChange = (value) => {
-    setEditorValue(value);
-  };
   return (
     <Container maxWidth="xl">
-      <RichTextEditor onChange={handleChange} />
-      <ReactQuill
-        width="100%"
-        className="prose prose-lg"
-        value={editorValue}
-        readOnly={true}
-        theme={"bubble"}
-      />
+      <div className="flex justify-center align-middle">
+        <div className="lg:w-1/3 md:w-1/2">
+          default
+          <PostForm />
+        </div>
+      </div>
     </Container>
   );
 };
