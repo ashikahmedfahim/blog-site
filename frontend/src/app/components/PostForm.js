@@ -28,7 +28,7 @@ const PostForm = (props) => {
     if (selectedFile) {
       formData.file = selectedFile;
     }
-    // props.handlePost(formData);
+    props.handlePost(formData);
   };
 
   const onSelectFile = (e) => {

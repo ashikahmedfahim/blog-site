@@ -1,5 +1,5 @@
 const Joi = require("joi");
-Joi.objectId = require("joi-objectid")(Joi);
+// Joi.objectId = require("joi-objectid")(Joi);
 
 module.exports.isValidUserObject = (data) => {
   const schema = Joi.object({
@@ -31,7 +31,7 @@ module.exports.isValidPostObject = (data) => {
     title: Joi.string().required(),
     description: Joi.string().required(),
     img_url: Joi.string(),
-    user_id: Joi.objectId().required(),
+    user_id: Joi.number().required(),
   });
   const { error, value } = schema.validate(data);
   return { error, value };

@@ -11,24 +11,22 @@ const Post = (props) => {
   const navigate = useNavigate();
 
   const goToPost = () => {
-    navigate(`/posts/${props.id}`, { replace: false });
+    navigate(`/posts/${props.post.id}`, { replace: false });
   };
   return (
     <Card sx={{ maxWidth: 345 }} className="mb-5">
       <CardMedia
         component="img"
         height="140"
-        maxHeight="140"
         image="https://source.unsplash.com/random"
         alt="green iguana"
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Lizard
+          {props.post.title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {props.post.description}
         </Typography>
       </CardContent>
       <CardActions>

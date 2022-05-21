@@ -8,6 +8,7 @@ module.exports.isAuthenticated = (req, res, next) => {
     const token = req.header("Authorization").replace("Bearer ", "");
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
     if (!decoded) throw new ExpressError(401, "Invalid token");
+    req.user = decoded;
     next();
   } catch (error) {
     next(error);

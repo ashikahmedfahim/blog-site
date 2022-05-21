@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Container } from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
-import { getAllPosts } from "../redux/actions/PostAction";
+import { getAllPosts } from "../redux/actions/PostActions";
 import CircularIndeterminate from "../components/CircularIndeterminate";
 import { removeSuccess, removeError } from "../redux/actions/HelperActions";
 import SnackBar from "../components/SnackBar";

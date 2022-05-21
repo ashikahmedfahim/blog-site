@@ -22,11 +22,14 @@ module.exports.getOne = async (req, res) => {
 };
 
 module.exports.createOne = async (req, res) => {
-  const { error, value } = DataValidator.isValidPostObject(req.body);
+  const { error, value } = DataValidator.isValidPostObject({
+    ...req.body,
+    user_id: req.user.id,
+  });
   if (error) throw new ExpressError(400, error.details[0].message);
   const post = await Post.create(value);
   if (!post) throw new ExpressError(400, "Post not created");
-  ModelService.successResponse(res, 201, post, "Post created successfully");
+  ModelService.successResponse(res, 201, "post", "Post created successfully");
 };
 
 module.exports.updateOne = async (req, res) => {
