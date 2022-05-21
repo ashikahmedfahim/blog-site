@@ -5,13 +5,20 @@ import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import { useNavigate } from "react-router-dom";
 
-const Post = () => {
+const Post = (props) => {
+  const navigate = useNavigate();
+
+  const goToPost = () => {
+    navigate(`/posts/${props.id}`, { replace: false });
+  };
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card sx={{ maxWidth: 345 }} className="mb-5">
       <CardMedia
         component="img"
         height="140"
+        maxHeight="140"
         image="https://source.unsplash.com/random"
         alt="green iguana"
       />
@@ -25,8 +32,9 @@ const Post = () => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button size="small">Share</Button>
-        <Button size="small">Learn More</Button>
+        <Button size="small" onClick={goToPost}>
+          Read More
+        </Button>
       </CardActions>
     </Card>
   );
