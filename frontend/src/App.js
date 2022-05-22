@@ -4,6 +4,7 @@ import { Provider } from "react-redux";
 import { store } from "./app/redux/store";
 import AppBar from "./app/components/AppBar";
 import CircularIndeterminate from "./app/components/CircularIndeterminate";
+import MyPosts from "./app/pages/MyPosts";
 
 const Home = lazy(() => import("./app/pages/Home"));
 const About = lazy(() => import("./app/pages/About"));
@@ -26,6 +27,7 @@ const App = () => (
           <Route path="/create-post" element={<CreatePost />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/sign-in" element={<SignIn />} />
+          <Route path="/my-posts" element={<MyPosts />} />
           <Route path="*" element={<div>Not found</div>} />
         </Routes>
       </Suspense>
