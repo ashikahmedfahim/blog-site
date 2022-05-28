@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import React, { Suspense, lazy } from "react";
-import { Provider } from "react-redux";
-import { store } from "./app/redux/store";
 import AppBar from "./app/components/AppBar";
 import CircularIndeterminate from "./app/components/CircularIndeterminate";
 import MyPosts from "./app/pages/MyPosts";
+import { autoSignIn } from "./app/redux/actions/AuthActions";
+import { useDispatch } from "react-redux";
 
 const Home = lazy(() => import("./app/pages/Home"));
 const About = lazy(() => import("./app/pages/About"));
@@ -14,8 +14,10 @@ const SignUp = lazy(() => import("./app/pages/SignUp"));
 const SignIn = lazy(() => import("./app/pages/SignIn"));
 const CreatePost = lazy(() => import("./app/pages/CreatePost"));
 
-const App = () => (
-  <Provider store={store}>
+const App = () => {
+  const dispatch = useDispatch();
+  dispatch(autoSignIn());
+  return (
     <Router>
       <AppBar />
       <Suspense fallback={<CircularIndeterminate />}>
@@ -32,7 +34,7 @@ const App = () => (
         </Routes>
       </Suspense>
     </Router>
-  </Provider>
-);
+  );
+};
 
 export default App;

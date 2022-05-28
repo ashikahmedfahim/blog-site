@@ -3,6 +3,8 @@ import ReactDOM from "react-dom";
 import App from "./App";
 import "./index.css";
 import axios from "axios";
+import { Provider } from "react-redux";
+import { store } from "./app/redux/store";
 
 axios.interceptors.request.use((request) => {
   const { token } = JSON.parse(localStorage.getItem("token"));
@@ -30,7 +32,9 @@ axios.interceptors.response.use(
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );

@@ -36,3 +36,16 @@ export const signUp = (formData) => {
     }
   };
 };
+
+export const autoSignIn = () => {
+  return async (dispatch) => {
+    try {
+      const token = JSON.parse(localStorage.getItem("token"));
+      if (token) {
+        dispatch({ type: AuthConstants.SUCCESSFUL_SIGN_IN, payload: token });
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+};
